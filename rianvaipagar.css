@@ -111,3 +111,26 @@ select:focus {
         padding: 15px; /* Aumenta o padding para telas pequenas */
     }
 }
+/* Adicione este código ao seu arquivo CSS (rianvaipagar.css) */
+#backToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.4s;
+    opacity: 0.7;
+}
+
+#backToTopBtn:hover {
+    background-color: #218838;
+    opacity: 1;
+}

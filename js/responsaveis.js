@@ -4,21 +4,20 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchPosts();
 
     document.getElementById('responsavelFormElement').addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevenir o recarregamento da página
+        event.preventDefault();
         saveResponsavel();
     });
 });
 
 function fetchResponsaveis() {
-    fetch('http://10.188.35.110:8000/responsaveis') // Altere para o endpoint correto se necessário
+    fetch('http://10.188.35.110:8000/responsaveis')
         .then(response => response.json())
         .then(data => {
             const list = document.getElementById('responsaveisList');
             list.innerHTML = '<ul class="list-group border border-danger">';
             data.responsaveis.forEach(resp => {
-                // Extrair o nome da imagem corretamente
-                const imageName = resp.foto.split('/').pop(); // Pegamos apenas o nome da imagem
-                const imageUrl = `http://10.188.35.110:8000/responsaveisimg/${imageName}`; // Montamos o caminho correto da imagem
+                const imageName = resp.foto.split('/').pop();
+                const imageUrl = `http://10.188.35.110:8000/responsaveisimg/${imageName}`;
 
                 list.innerHTML += `
                     <li class="list-group-item m-2 p-2 border-bottom">
@@ -42,15 +41,12 @@ function fetchResponsaveis() {
         .catch(error => console.error('Erro ao buscar responsáveis:', error));
 }
 
-
 function fetchTiposResponsaveis() {
-    fetch('http://10.188.35.110:8000/tipos-responsaveis') // Altere para o endpoint correto se necessário
+    fetch('http://10.188.35.110:8000/tipos-responsaveis')
         .then(response => response.json())
         .then(data => {
-            
             const tiposSelect = document.getElementById('tiposResponsavel');
             data.responsaveis.forEach(tipo => {
-            
                 tiposSelect.innerHTML += `<option value="${tipo.id_tipos_resps}">${tipo.nome}</option>`;
             });
         })
@@ -58,7 +54,7 @@ function fetchTiposResponsaveis() {
 }
 
 function fetchPosts() {
-    fetch('http://10.188.35.110:8000/posts') // Altere para o endpoint correto se necessário
+    fetch('http://10.188.35.110:8000/posts')
         .then(response => response.json())
         .then(data => {
             const postSelect = document.getElementById('post');
@@ -71,32 +67,22 @@ function fetchPosts() {
 
 function showAddResponsavelForm() {
     document.getElementById('responsavelForm').classList.remove('d-none');
-    document.getElementById('responsavelId').value = '';
-    document.getElementById('nomeResponsavel').value = '';
-    document.getElementById('dataIn').value = '';
-    document.getElementById('dataOut').value = '';
-    document.getElementById('biografia').value = '';
-    document.getElementById('foto').value = '';
-    document.getElementById('tiposResponsavel').value = '';
-    document.getElementById('post').value = '';
+    resetResponsavelForm();
     document.getElementById('formTitle').innerText = 'Adicionar Novo Responsável';
-    responsavelForm.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('responsavelForm').scrollIntoView({ behavior: 'smooth' });
 }
 
 function showEditResponsavelForm(id, nome, dataIn, dataOut, biografia, foto, tipoId, postId) {
     document.getElementById('responsavelForm').classList.remove('d-none');
     document.getElementById('responsavelId').value = id;
     document.getElementById('nomeResponsavel').value = nome;
-    document.getElementById('dataIn').value = dataIn.split('T')[0]; // Formatar data
-    document.getElementById('dataOut').value = dataOut ? dataOut.split('T')[0] : ''; // Formatar data
-    document.getElementById('biografia').value = biografia;
-    document.getElementById('tiposResponsavel').value = tipoId;
-    document.getElementById('post').value = postId;
+    document.getElementById('dataIn').value = dataIn ? dataIn.split('T')[0] : '';
+    document.getElementById('dataOut').value = dataOut ? dataOut.split('T')[0] : '';
+    document.getElementById('biografia').value = biografia || '';
+    document.getElementById('tiposResponsavel').value = tipoId || '';
+    document.getElementById('post').value = postId || '';
     document.getElementById('formTitle').innerText = 'Editar Responsável';
-}
-
-function hideResponsavelForm() {
-    document.getElementById('responsavelForm').classList.add('d-none');
+    document.getElementById('responsavelForm').scrollIntoView({ behavior: 'smooth' });
 }
 
 function saveResponsavel() {
@@ -107,13 +93,14 @@ function saveResponsavel() {
     const biografia = document.getElementById('biografia').value;
     const tipoId = document.getElementById('tiposResponsavel').value;
     const postId = document.getElementById('post').value;
+    const fotoFile = document.getElementById('foto').files[0];
 
     const formData = new FormData();
     formData.append('nome', nome);
     formData.append('data_in', dataIn);
-    formData.append('data_out', dataOut);
-    formData.append('biografia', biografia);
-    formData.append('foto', document.getElementById('foto').files[0]);
+    if (dataOut) formData.append('data_out', dataOut);
+    formData.append('biografia', biografia || '');
+    if (fotoFile) formData.append('foto', fotoFile);
     formData.append('tipos_resps_id_tipos_resps', tipoId);
     formData.append('posts_id_post', postId);
 
@@ -135,6 +122,22 @@ function saveResponsavel() {
         hideResponsavelForm();
     })
     .catch(error => console.error('Erro ao salvar responsável:', error));
+}
+
+function hideResponsavelForm() {
+    document.getElementById('responsavelForm').classList.add('d-none');
+    resetResponsavelForm();
+}
+
+function resetResponsavelForm() {
+    document.getElementById('responsavelId').value = '';
+    document.getElementById('nomeResponsavel').value = '';
+    document.getElementById('dataIn').value = '';
+    document.getElementById('dataOut').value = '';
+    document.getElementById('biografia').value = '';
+    document.getElementById('foto').value = '';
+    document.getElementById('tiposResponsavel').value = '';
+    document.getElementById('post').value = '';
 }
 
 function deleteResponsavel(id) {

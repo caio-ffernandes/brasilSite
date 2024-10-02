@@ -12,16 +12,26 @@ function fetchPosts() {
     fetch('http://10.188.35.110:8000/posts')
         .then(response => response.json())
         .then(data => {
+            console.log(data); // Verificar o que está sendo retornado
+
             const list = document.getElementById('postsList');
+            if (!data.posts || data.posts.length === 0) {
+                list.innerHTML = '<p>Nenhum post encontrado.</p>';
+                return;
+            }
+
             list.innerHTML = '<ul class="list-group border border-danger">';
+
             data.posts.forEach(post => {
-                const nomeReal = post.imagem_post.split("/").pop();
-                const imageUrl = `http://10.188.35.110:8000/postsimg/${nomeReal}`;
+                // Verifica se a imagem existe, caso contrário, usa uma imagem padrão ou não exibe a imagem
+                const nomeReal = post.imagem_post ? post.imagem_post.split("/").pop() : null;
+                const imageUrl = nomeReal ? `http://10.188.35.110:8000/postsimg/${nomeReal}` : 'path/to/default-image.jpg'; // Caminho para uma imagem padrão
+
                 list.innerHTML += `
                     <li class="list-group-item m-2 p-2 border-bottom">
                         <div class="row d-flex justify-content-between">
                             <div class="col-4">
-                                <img src="${imageUrl}" alt="${post.nome_post}" class="img-thumbnail" style="max-width: 150px;">
+                                ${nomeReal ? `<img src="${imageUrl}" alt="${post.nome_post}" class="img-thumbnail" style="max-width: 150px;">` : ''}
                             </div>
                             <div class="col-8">
                                 <strong>${post.nome_post}</strong>
@@ -34,6 +44,7 @@ function fetchPosts() {
                         </div>
                     </li>`;
             });
+
             list.innerHTML += '</ul>';
         })
         .catch(error => console.error('Erro ao buscar posts:', error));
