@@ -29,7 +29,7 @@ function fetchResponsaveis() {
                                 <strong>${resp.nome}</strong>
                                 <p>${resp.biografia}</p>
                                 <button class="btn btn-info btn-sm float-end ms-2" 
-                                    onclick="showEditResponsavelForm(${resp.id_resposaveis}, '${resp.nome}', '${resp.data_in}', '${resp.data_out}', '${resp.biografia}', '${resp.foto}', ${resp.tipos_resps_id_tipos_resps}, ${resp.posts_id_post})">Editar</button>
+                                    onclick="showEditResponsavelForm(${resp.id_resposaveis}, '${resp.nome}', '${resp.data_in}', '${resp.data_out || ''}', '${encodeURIComponent(resp.biografia)}', '${resp.foto}', ${resp.tipos_resps_id_tipos_resps}, ${resp.posts_id_post})">Editar</button>
                                 <button class="btn btn-danger btn-sm float-end" 
                                     onclick="deleteResponsavel(${resp.id_resposaveis})">Deletar</button>
                             </div>
@@ -77,8 +77,8 @@ function showEditResponsavelForm(id, nome, dataIn, dataOut, biografia, foto, tip
     document.getElementById('responsavelId').value = id;
     document.getElementById('nomeResponsavel').value = nome;
     document.getElementById('dataIn').value = dataIn ? dataIn.split('T')[0] : '';
-    document.getElementById('dataOut').value = dataOut ? dataOut.split('T')[0] : '';
-    document.getElementById('biografia').value = biografia || '';
+    document.getElementById('dataOut').value = dataOut ? dataOut.split('T')[0] : ''; // Certifique-se de que a data está correta
+    document.getElementById('biografia').value = decodeURIComponent(biografia);
     document.getElementById('tiposResponsavel').value = tipoId || '';
     document.getElementById('post').value = postId || '';
     document.getElementById('formTitle').innerText = 'Editar Responsável';
@@ -100,7 +100,7 @@ function saveResponsavel() {
     formData.append('data_in', dataIn);
     if (dataOut) formData.append('data_out', dataOut);
     formData.append('biografia', biografia || '');
-    if (fotoFile) formData.append('foto', fotoFile);
+    if (fotoFile) formData.append('foto', fotoFile); // Somente adiciona a foto se houver um arquivo
     formData.append('tipos_resps_id_tipos_resps', tipoId);
     formData.append('posts_id_post', postId);
 
@@ -135,7 +135,7 @@ function resetResponsavelForm() {
     document.getElementById('dataIn').value = '';
     document.getElementById('dataOut').value = '';
     document.getElementById('biografia').value = '';
-    document.getElementById('foto').value = '';
+    document.getElementById('foto').value = ''; // Limpa o campo de foto
     document.getElementById('tiposResponsavel').value = '';
     document.getElementById('post').value = '';
 }
