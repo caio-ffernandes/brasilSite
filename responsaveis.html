@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Responsáveis</title>
+   <link rel="stylesheet" href="rianvaipagar.css">
+<body>
+    <div class="container mt-5">
+        <div class="row border-bottom m-3 p-1 shadow">
+            <div class="col"><h2 class="mb-4">Gerenciar Responsáveis</h2></div>
+            <div class="col"><button class="btn btn-outline-success mb-3" onclick="javascript:history.back();">Voltar</button></div>
+        </div>
+
+        <section class="m-4">
+            <div class="row">
+                <div class="col"><h2>Listar Responsáveis</h2></div>
+                <div class="col"><button class="btn btn-outline-success mb-3" onclick="showAddResponsavelForm()">Adicionar Responsável</button></div>
+            </div>
+
+            <div id="responsaveisList" class="mb-4"></div>
+        </section>
+
+        <section id="responsavelForm" class="d-none">
+            <h2 id="formTitle">Adicionar Novo Responsável</h2>
+            <form id="responsavelFormElement">
+                <input type="hidden" id="responsavelId">
+                <div class="mb-3">
+                    <label for="nomeResponsavel" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nomeResponsavel" required>
+                </div>
+                <div class="mb-3">
+                    <label for="dataIn" class="form-label">Data de Início</label>
+                    <input type="date" class="form-control" id="dataIn" required>
+                </div>
+                <div class="mb-3">
+                    <label for="dataOut" class="form-label">Data de Fim</label>
+                    <input type="date" class="form-control" id="dataOut">
+                </div>
+                <div class="mb-3">
+                    <label for="biografia" class="form-label">Biografia</label>
+                    <textarea class="form-control" id="biografia" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="foto" class="form-label">Foto</label>
+                    <input type="file" class="form-control" id="foto" accept="image/*">
+                </div>
+                <div class="mb-3">
+                    <label for="tiposResponsavel" class="form-label">Tipo de Responsável</label>
+                    <select class="form-select" id="tiposResponsavel" required>
+                        <option value="" disabled selected>Selecione um tipo</option>
+                        <!-- Tipos de responsáveis serão carregados aqui -->
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="post" class="form-label">Post relacionado</label>
+                    <select class="form-select" id="post" required>
+                        <option value="" disabled selected>Selecione um post</option>
+                        <!-- Posts serão carregados aqui -->
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" class="btn btn-secondary" onclick="hideResponsavelForm()">Cancelar</button>
+            </form>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="js/responsaveis.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9; /* Fundo suave */
+    color: #333; /* Cor do texto */
+}
+
+.container {
+    max-width: 1200px; /* Largura máxima */
+    margin: auto; /* Centraliza o conteúdo */
+    padding: 20px;
+}
+
+.row {
+    margin: 20px 0; /* Espaçamento entre as linhas */
+}
+
+h2 {
+    font-size: 2rem;
+    color: #4A4E69; /* Cor dos títulos */
+    margin-bottom: 20px; /* Margem abaixo dos títulos */
+}
+
+.btn {
+    border-radius: 5px; /* Bordas arredondadas nos botões */
+    padding: 10px 20px; /* Aumenta o tamanho do botão */
+    font-size: 1rem; /* Aumenta o tamanho da fonte do botão */
+    font-weight: bold; /* Deixa o texto mais destacado */
+    transition: background-color 0.3s ease, transform 0.2s; /* Transição suave para os botões */
+}
+
+.btn:hover {
+    transform: scale(1.05); /* Aumenta levemente o botão ao passar o mouse */
+}
+
+.btn-primary {
+    background-color: #9a7baf; /* Cor do botão primário */
+    color: white; /* Cor do texto do botão primário */
+}
+
+.btn-primary:hover {
+    background-color: #7c5b98; /* Cor do botão primário ao passar o mouse */
+}
+
+.btn-outline-success {
+    color: #4CAF50; /* Cor do texto do botão de sucesso */
+    border: 2px solid #4CAF50; /* Borda do botão de sucesso */
+}
+
+.btn-outline-success:hover {
+    background-color: #4CAF50; /* Cor de fundo do botão de sucesso ao passar o mouse */
+    color: white; /* Cor do texto do botão de sucesso ao passar o mouse */
+}
+
+.shadow {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.border-bottom {
+    border-bottom: 2px solid #4A4E69; /* Borda inferior dos cabeçalhos */
+}
+
+section {
+    background-color: white; /* Fundo branco para as seções */
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    margin-bottom: 20px; /* Espaçamento inferior das seções */
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+    border-radius: 5px; /* Bordas arredondadas para inputs */
+    border: 1px solid #ddd; /* Borda leve */
+    padding: 10px; /* Espaçamento interno nos inputs */
+    width: 100%; /* Largura total */
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #9a7baf; /* Cor da borda ao focar */
+    outline: none; /* Remove o contorno padrão */
+    box-shadow: 0 0 5px rgba(154, 123, 175, 0.5); /* Sombra ao focar */
+}
+
+.d-none {
+    display: none; /* Oculta elementos */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.5rem; /* Tamanho menor dos títulos em telas pequenas */
+    }
+
+    .container {
+        padding: 10px; /* Menos padding em telas pequenas */
+    }
+
+    .btn {
+        width: 100%; /* Botões ocupam toda a largura */
+        padding: 15px; /* Aumenta o padding para telas pequenas */
+    }
+}

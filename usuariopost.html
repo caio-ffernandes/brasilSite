@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Usuários e Posts</title>
+    <link rel="stylesheet" href="rianvaipagar.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row border-bottom m-3 p-1 shadow">
+            <div class="col"><h2 class="mb-4">Gerenciar Usuários e Posts</h2></div>
+            <div class="col"><button class="btn btn-outline-success mb-3" onclick="javascript:history.back();">Voltar</button></div>
+        </div>
+
+        <section class="m-4">
+            <h2>Listar Usuários e Posts</h2>
+            <div id="usuariosPostsList" class="mb-4"></div>
+        </section>
+    </div>
+
+    <script>
+      // Função para listar usuários e posts
+function listarUsuariosPosts() {
+    const listaContainer = document.getElementById('usuariosPostsList');
+    listaContainer.innerHTML = '';  // Limpa a lista existente
+
+    // Fetch para obter usuários e posts
+    fetch('http://localhost:8000/usuarios/usuarios_has_posts/')
+        .then(response => response.json())
+        .then(data => {
+            // Iterar sobre os dados retornados
+            data.forEach(item => {
+                const usuario = item.usuarios_id;
+                const post = item.posts_id_post;
+
+                // Obter URL da imagem do post
+                const nomeReal = post.imagem_post.split("/").pop();
+                const imageUrl = `http://localhost:8000/posts/${nomeReal}`;
+
+                // Criar o card com as informações
+                const card = `
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">${usuario.nome} (${usuario.email})</h5>
+                            <p class="card-text"><strong>Post:</strong> ${post.nome_post}</p>
+                            <p class="card-text"><strong>Descrição:</strong> ${post.descricao_post}</p>
+                            <img src="${imageUrl}" alt="${post.nome_post}" class="img-fluid" />
+                        </div>
+                    </div>
+                         <hr class="my-4">
+                `;
+
+                listaContainer.innerHTML += card;  // Adiciona o card à lista
+            });
+        })
+        .catch(error => console.error('Erro ao buscar usuários e posts:', error));
+}
+
+// Chama a função para listar os dados ao carregar a página
+window.onload = listarUsuariosPosts;
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
