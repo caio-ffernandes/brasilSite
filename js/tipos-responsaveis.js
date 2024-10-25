@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchTiposResponsaveis() {
-    fetch('http://10.188.35.110:8000/tipos-responsaveis')
+    fetch('http://10.188.35.64:8000/tipos-responsaveis')
         .then(response => response.json())
         .then(data => {
             const list = document.getElementById('tiposRespList');
@@ -53,7 +53,7 @@ function saveTipoResp() {
     const id = document.getElementById('tipoRespId').value;
     const nome = document.getElementById('nomeTipoResp').value;
     const method = id ? 'PATCH' : 'POST';
-    const url = id ? `http://10.188.35.110:8000/tipos-responsaveis/${id}` : `http://10.188.35.110:8000/tipos-responsaveis`;
+    const url = id ? `http://10.188.35.64:8000/tipos-responsaveis/${id}` : `http://10.188.35.64:8000/tipos-responsaveis`;
 
     fetch(url, {
         method: method,
@@ -76,7 +76,7 @@ function saveTipoResp() {
 }
 
 function deleteTipoResp(id) {
-    fetch(`http://10.188.35.110:8000/tipos-responsaveis/${id}`, {
+    fetch(`http://10.188.35.64:8000/tipos-responsaveis/${id}`, {
         method: 'DELETE'
     })
     .then(response => {

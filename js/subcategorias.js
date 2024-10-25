@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchSubcategorias() {
-    fetch('http://10.188.35.110:8000/subcategorias') // Altere para o endpoint correto se necessário
+    fetch('http://10.188.35.64:8000/subcategorias') // Altere para o endpoint correto se necessário
         .then(response => response.json())
         .then(data => {
             const list = document.getElementById('subcategoriasList');
@@ -36,7 +36,7 @@ function fetchSubcategorias() {
 }
 
 function fetchCulturas() {
-    fetch('http://10.188.35.110:8000/culturas') // Altere para o endpoint correto se necessário
+    fetch('http://10.188.35.64:8000/culturas') // Altere para o endpoint correto se necessário
         .then(response => response.json())
         .then(data => {
             const culturaSelect = document.getElementById('culturaSelect');
@@ -78,7 +78,7 @@ function saveSubcategoria() {
     const culturaId = document.getElementById('culturaSelect').value; // Obtém o valor da cultura selecionada
 
     const method = id ? 'PATCH' : 'POST';
-    const url = id ? `http://10.188.35.110:8000/subcategorias/${id}` : `http://10.188.35.110:8000/subcategorias`;
+    const url = id ? `http://10.188.35.64:8000/subcategorias/${id}` : `http://10.188.35.64:8000/subcategorias`;
 
     fetch(url, {
         method: method,
@@ -104,7 +104,7 @@ function saveSubcategoria() {
 }
 
 function deleteSubcategoria(id) {
-    fetch(`http://10.188.35.110:8000/subcategorias/${id}`, {
+    fetch(`http://10.188.35.64:8000/subcategorias/${id}`, {
         method: 'DELETE'
     })
     .then(response => {

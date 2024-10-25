@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchPosts() {
-    fetch('http://10.188.35.110:8000/posts')
+    fetch('http://10.188.35.64:8000/posts')
         .then(response => response.json())
         .then(data => {
             console.log(data); // Verificar o que está sendo retornado
@@ -25,7 +25,7 @@ function fetchPosts() {
             data.posts.forEach(post => {
                 // Verifica se a imagem existe, caso contrário, usa uma imagem padrão ou não exibe a imagem
                 const nomeReal = post.imagem_post ? post.imagem_post.split("/").pop() : null;
-                const imageUrl = nomeReal ? `http://10.188.35.110:8000/postsimg/${nomeReal}` : 'path/to/default-image.jpg'; // Caminho para uma imagem padrão
+                const imageUrl = nomeReal ? `http://10.188.35.64:8000/postsimg/${nomeReal}` : 'path/to/default-image.jpg'; // Caminho para uma imagem padrão
 
                 list.innerHTML += `
                     <li class="list-group-item m-2 p-2 border-bottom">
@@ -51,7 +51,7 @@ function fetchPosts() {
 }
 
 function fetchSubcategorias() {
-    fetch('http://10.188.35.110:8000/subcategorias')
+    fetch('http://10.188.35.64:8000/subcategorias')
         .then(response => response.json())
         .then(data => {
             const subcategoriaSelect = document.getElementById('subcategoria');
@@ -80,7 +80,7 @@ function showEditPostForm(id, nome, descricao, imagem, subcategoria) {
     document.getElementById('formTitle').innerText = 'Editar Post';
 
     // Pré-visualizar imagem se disponível
-    const imageUrl = `http://10.188.35.110:8000/posts/${imagem.split('/').pop()}`;
+    const imageUrl = `http://10.188.35.64:8000/posts/${imagem.split('/').pop()}`;
     const preview = document.getElementById('imagemPostPreview');
     preview.src = imageUrl;
     preview.style.display = 'block';
@@ -102,7 +102,7 @@ function savePost() {
     }
 
     const method = id ? 'PATCH' : 'POST';
-    const url = id ? `http://10.188.35.110:8000/posts/${id}` : `http://10.188.35.110:8000/posts`;
+    const url = id ? `http://10.188.35.64:8000/posts/${id}` : `http://10.188.35.64:8000/posts`;
 
     fetch(url, {
         method: method,
@@ -136,7 +136,7 @@ function resetPostForm() {
 }
 
 function deletePost(id) {
-    fetch(`http://10.188.35.110:8000/posts/${id}`, {
+    fetch(`http://10.188.35.64:8000/posts/${id}`, {
         method: 'DELETE'
     })
     .then(response => {
