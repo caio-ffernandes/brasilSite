@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchUsuarios() {
-    fetch('http://10.188.35.64:8000/usuarios')
+    fetch('http://10.188.35.101:8000/usuarios')
         .then(response => response.json())
         .then(data => {
             const list = document.getElementById('usuariosList');
@@ -63,7 +63,7 @@ function saveUsuario() {
     const tipo = document.getElementById('usuarioTipo').value; // Pegar o valor do tipo
 
     const method = id ? 'PATCH' : 'POST';
-    const url = id ? `http://10.188.35.64:8000/usuarios/${id}` : `http://10.188.35.64:8000/usuarios`;
+    const url = id ? `http://10.188.35.101:8000/usuarios/${id}` : `http://10.188.35.101:8000/usuarios`;
 
     fetch(url, {
         method: method,
@@ -86,7 +86,7 @@ function saveUsuario() {
 }
 
 function deleteUsuario(id) {
-    fetch(`http://10.188.35.64:8000/usuarios/${id}`, {
+    fetch(`http://10.188.35.101:8000/usuarios/${id}`, {
         method: 'DELETE'
     })
     .then(response => {

@@ -10,14 +10,14 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchResponsaveis() {
-    fetch('http://10.188.35.64:8000/responsaveis')
+    fetch('http://10.188.35.101:8000/responsaveis')
         .then(response => response.json())
         .then(data => {
             const list = document.getElementById('responsaveisList');
             list.innerHTML = '<ul class="list-group border border-danger">';
             data.responsaveis.forEach(resp => {
                 const imageName = resp.foto.split('/').pop();
-                const imageUrl = `http://10.188.35.64:8000/responsaveisimg/${imageName}`;
+                const imageUrl = `http://10.188.35.101:8000/responsaveisimg/${imageName}`;
 
                 list.innerHTML += `
                     <li class="list-group-item m-2 p-2 border-bottom">
@@ -42,7 +42,7 @@ function fetchResponsaveis() {
 }
 
 function fetchTiposResponsaveis() {
-    fetch('http://10.188.35.64:8000/tipos-responsaveis')
+    fetch('http://10.188.35.101:8000/tipos-responsaveis')
         .then(response => response.json())
         .then(data => {
             const tiposSelect = document.getElementById('tiposResponsavel');
@@ -54,7 +54,7 @@ function fetchTiposResponsaveis() {
 }
 
 function fetchPosts() {
-    fetch('http://10.188.35.64:8000/posts')
+    fetch('http://10.188.35.101:8000/posts')
         .then(response => response.json())
         .then(data => {
             const postSelect = document.getElementById('post');
@@ -105,7 +105,7 @@ function saveResponsavel() {
     formData.append('posts_id_post', postId);
 
     const method = id ? 'PATCH' : 'POST';
-    const url = id ? `http://10.188.35.64:8000/responsaveis/${id}` : `http://10.188.35.64:8000/responsaveis`;
+    const url = id ? `http://10.188.35.101:8000/responsaveis/${id}` : `http://10.188.35.101:8000/responsaveis`;
 
     fetch(url, {
         method: method,
@@ -141,7 +141,7 @@ function resetResponsavelForm() {
 }
 
 function deleteResponsavel(id) {
-    fetch(`http://10.188.35.64:8000/responsaveis/${id}`, {
+    fetch(`http://10.188.35.101:8000/responsaveis/${id}`, {
         method: 'DELETE'
     })
     .then(response => {
